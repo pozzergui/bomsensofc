@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premiação Maio 2026 – Bom Senso FC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --gold: #f5c842;
+    --gold-dark: #c89a10;
+    --silver: #b0bec5;
+    --bronze: #cd7f32;
+    --green: #1db954;
+    --green-dark: #148040;
+    --bg: #0a0f0a;
+    --bg2: #111811;
+    --bg3: #182318;
+    --surface: #1a261a;
+    --border: #2a3d2a;
+    --text: #e8f0e8;
+    --muted: #7a9a7a;
+    --red: #e53935;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px 60px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 52px 0 36px;
+    position: relative;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--green);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  .header h1 span {
+    color: var(--gold);
+  }
+  .header-sub {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .header-divider {
+    width: 60px; height: 3px;
+    background: var(--green);
+    margin: 20px auto 0;
+    border-radius: 2px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin: 36px 0 28px;
+    background: var(--bg2);
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 12px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: all .2s;
+    letter-spacing: .3px;
+  }
+  .tab-btn.active {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* AWARD CARDS GRID */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .award-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s;
+    animation: fadeUp .5s ease both;
+  }
+  .award-card:hover {
+    transform: translateY(-3px);
+    border-color: #3a5a3a;
+  }
+  .award-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+  .award-card.gold::before { background: var(--gold); }
+  .award-card.green::before { background: var(--green); }
+  .award-card.silver::before { background: var(--silver); }
+  .award-card.blue::before { background: #42a5f5; }
+  .award-card.red::before { background: var(--red); }
+  .award-card.bronze::before { background: var(--bronze); }
+
+  .award-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .award-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .award-player {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1;
+  }
+  .award-stat {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .award-stat strong {
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .award-card.green .award-stat strong { color: var(--green); }
+  .award-card.silver .award-stat strong { color: var(--silver); }
+  .award-card.blue .award-stat strong { color: #42a5f5; }
+  .award-card.red .award-stat strong { color: #ef5350; }
+  .award-card.bronze .award-stat strong { color: var(--bronze); }
+
+  .award-tag {
+    display: inline-block;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 7px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-top: 10px;
+    text-transform: uppercase;
+  }
+
+  /* HERO MVP */
+  .mvp-hero {
+    background: linear-gradient(135deg, #0f1e0f 0%, #1a3020 50%, #0f1e0f 100%);
+    border: 1px solid #2a5a2a;
+    border-radius: 18px;
+    padding: 32px 32px 28px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    animation: fadeUp .4s ease both;
+  }
+  .mvp-hero::after {
+    content: 'MVP';
+    position: absolute;
+    right: -10px; top: -20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 130px;
+    color: rgba(255,255,255,0.025);
+    letter-spacing: 4px;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .mvp-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  .mvp-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 6vw, 58px);
+    letter-spacing: 2px; color: #fff; line-height: 1;
+  }
+  .mvp-meta {
+    display: flex; gap: 20px; margin-top: 18px; flex-wrap: wrap;
+  }
+  .mvp-stat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .mvp-stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; color: var(--gold); line-height: 1;
+  }
+  .mvp-stat-lbl {
+    font-size: 10px; color: var(--muted); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-top: 3px;
+  }
+  .mvp-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(29, 185, 84, 0.15);
+    border: 1px solid rgba(29, 185, 84, 0.3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px; font-weight: 600; color: var(--green);
+    margin-top: 14px;
+  }
+
+  /* DEFENDER PODIUM */
+  .podium-section { margin-bottom: 20px; }
+  .section-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  .podium-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .podium-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    position: relative;
+    transition: transform .2s;
+    animation: fadeUp .5s ease both;
+  }
+  .podium-card:hover { transform: translateY(-2px); }
+  .podium-card.p1 { border-color: #c89a1040; background: linear-gradient(180deg, #1a1800 0%, var(--bg2) 100%); }
+  .podium-card.p2 { border-color: #b0bec530; }
+  .podium-card.p3 { border-color: #cd7f3230; }
+  .podium-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px; line-height: 1;
+    margin-bottom: 6px;
+  }
+  .p1 .podium-rank { color: var(--gold); }
+  .p2 .podium-rank { color: var(--silver); }
+  .p3 .podium-rank { color: var(--bronze); }
+  .podium-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px; letter-spacing: .5px; color: #fff;
+    line-height: 1.1; margin-bottom: 6px;
+  }
+  .podium-pos {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted);
+    background: var(--bg3); border-radius: 3px; padding: 2px 7px;
+    display: inline-block; margin-bottom: 8px;
+  }
+  .podium-idx {
+    font-size: 12px; color: var(--muted);
+  }
+  .podium-idx strong { color: var(--text); }
+
+  /* TABLE */
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    animation: fadeUp .5s ease both;
+  }
+  .stats-table thead th {
+    background: var(--bg3);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .stats-table thead th:last-child { border-radius: 0 8px 0 0; text-align: right; }
+  .stats-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background .15s;
+  }
+  .stats-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .stats-table tbody td {
+    padding: 11px 12px;
+    color: var(--text);
+  }
+  .stats-table tbody td:last-child { text-align: right; }
+  .player-name { font-weight: 500; }
+  .player-nick { font-size: 11px; color: var(--muted); }
+  .pos-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    padding: 2px 6px; border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .pos-GOL { background: #1a3060; color: #6ab0ff; }
+  .pos-ZAG { background: #1a2510; color: #7ac87a; }
+  .pos-VOL { background: #251a10; color: #d4a555; }
+  .pos-MEI { background: #251530; color: #c07ae0; }
+  .pos-ATA { background: #301515; color: #e07a7a; }
+  .stat-highlight { color: var(--gold); font-weight: 700; }
+  .no-games { color: var(--muted); font-style: italic; font-size: 12px; }
+  .mvp-star { color: var(--gold); font-size: 12px; }
+  .mensalista { color: var(--green); font-size: 11px; }
+  .suplente { color: var(--muted); font-size: 11px; }
+
+  /* SCORING SECTION */
+  .scoring-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+    animation: fadeUp .45s ease both;
+  }
+  .scoring-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .scoring-card-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .scoring-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .scoring-row:last-child { border-bottom: none; }
+  .scoring-rank { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--border); min-width: 28px; }
+  .scoring-name { font-size: 13px; font-weight: 500; flex: 1; padding: 0 10px; }
+  .scoring-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--text);
+  }
+  .scoring-row:first-child .scoring-rank { color: var(--gold); }
+  .scoring-row:first-child .scoring-val { color: var(--gold); }
+  .scoring-row:nth-child(2) .scoring-rank { color: var(--silver); }
+  .scoring-row:nth-child(3) .scoring-rank { color: var(--bronze); }
+
+  /* TOTALS ROW */
+  .totals-bar {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    animation: fadeUp .4s ease both;
+  }
+  .total-item { text-align: center; }
+  .total-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px; color: var(--green); line-height: 1;
+  }
+  .total-lbl {
+    font-size: 10px; color: var(--muted); letter-spacing: 1.5px;
+    text-transform: uppercase; margin-top: 2px;
+  }
+
+  /* CLOSING TEXT */
+  .closing {
+    text-align: center;
+    margin-top: 48px;
+    padding: 28px 20px;
+    border-top: 1px solid var(--border);
+    animation: fadeUp .6s ease both;
+  }
+  .closing p {
+    font-size: 15px; color: var(--muted); font-style: italic; line-height: 1.7;
+  }
+  .closing strong { color: var(--text); font-style: normal; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .podium-grid { grid-template-columns: 1fr; }
+    .scoring-grid { grid-template-columns: 1fr; }
+    .mvp-meta { gap: 10px; }
+    .awards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">⚽ Bom Senso FC 🍺</div>
+    <h1>PREMIAÇÃO<br><span>MAIO</span> 2026</h1>
+    <p class="header-sub">Temporada 1 &nbsp;•&nbsp; 4 Rodadas &nbsp;•&nbsp; 17 Jogadores</p>
+    <div class="header-divider"></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('premios')">🏆 Prêmios</button>
+    <button class="tab-btn" onclick="switchTab('tabela')">📊 Tabela Completa</button>
+    <button class="tab-btn" onclick="switchTab('artilharia')">⚽ Artilharia &amp; Garçom</button>
+  </div>
+
+  <!-- TAB: PRÊMIOS -->
+  <div id="tab-premios" class="tab-panel active">
+
+    <!-- MVP HERO -->
+    <div class="mvp-hero">
+      <div class="mvp-label">⭐ MVP do Mês</div>
+      <div class="mvp-name">Leandro Sampaio</div>
+      <div class="mvp-meta">
+        <div class="mvp-stat">
+          <div class="mvp-stat-val">55</div>
+          <div class="mvp-stat-lbl">Defesas</div>
+        </div>
+        <div class="mvp-stat">
+          <div class="mvp-stat-val">6,91</div>
+          <div class="mvp-stat-lbl">Nota Média</div>
+        </div>
+        <div class="mvp-stat">
+          <div class="mvp-stat-val">4</div>
+          <div class="mvp-stat-lbl">Jogos</div>
+        </div>
+        <div class="mvp-stat">
+          <div class="mvp-stat-val">2×</div>
+          <div class="mvp-stat-lbl">MVP de Rodada</div>
+        </div>
+      </div>
+      <div class="mvp-badge">🟢 GOL &nbsp;·&nbsp; ✅ Mensalista &nbsp;·&nbsp; @leandro8921</div>
+    </div>
+
+    <!-- AWARDS GRID -->
+    <div class="awards-grid">
+
+      <div class="award-card gold" style="animation-delay:.05s">
+        <span class="award-icon">🥇</span>
+        <div class="award-label">Artilheiro do Mês</div>
+        <div class="award-player">Carlos Sturari</div>
+        <div class="award-stat"><strong>15</strong> gols &nbsp;·&nbsp; 4 jogos &nbsp;·&nbsp; 3,75 G/JG</div>
+        <div class="award-tag">ATA · @sturari08</div>
+      </div>
+
+      <div class="award-card gold" style="animation-delay:.1s">
+        <span class="award-icon">🅰️</span>
+        <div class="award-label">Garçom do Mês</div>
+        <div class="award-player">Carlos Sturari</div>
+        <div class="award-stat"><strong>11</strong> assistências &nbsp;·&nbsp; 2,75 A/JG</div>
+        <div class="award-tag">ATA · @sturari08</div>
+      </div>
+
+      <div class="award-card green" style="animation-delay:.15s">
+        <span class="award-icon">🧤</span>
+        <div class="award-label">Goleiro do Mês</div>
+        <div class="award-player">Leandro Sampaio</div>
+        <div class="award-stat"><strong>55</strong> defesas em 4 jogos</div>
+        <div class="award-tag">GOL · @leandro8921</div>
+      </div>
+
+      <div class="award-card blue" style="animation-delay:.2s">
+        <span class="award-icon">📈</span>
+        <div class="award-label">Melhor Média (≥ 3 jogos)</div>
+        <div class="award-player">Leandro Sampaio</div>
+        <div class="award-stat">Nota média <strong>6,91</strong></div>
+        <div class="award-tag">GOL · 4 jogos</div>
+      </div>
+
+      <div class="award-card red" style="animation-delay:.25s">
+        <span class="award-icon">🔒</span>
+        <div class="award-label">Menos Vazado</div>
+        <div class="award-player">João F. Cantarella</div>
+        <div class="award-stat">Apenas <strong>8,00</strong> GS/jg</div>
+        <div class="award-tag">MEI · @joca19 · 3 jogos</div>
+      </div>
+
+    </div>
+
+    <!-- DEFENSOR PODIUM -->
+    <div class="podium-section" style="margin-top:24px">
+      <div class="section-title">🛡️ Defensor do Mês</div>
+      <div class="podium-grid">
+        <div class="podium-card p1">
+          <div class="podium-rank">🥇</div>
+          <div class="podium-name">Leandro Sampaio</div>
+          <div class="podium-pos">GOL</div>
+          <div class="podium-idx">Índice: <strong>1º</strong></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">55 def. · nota 6,91 · 4 jogos</div>
+        </div>
+        <div class="podium-card p2">
+          <div class="podium-rank">🥈</div>
+          <div class="podium-name">Guilherme Pozzer</div>
+          <div class="podium-pos">VOL</div>
+          <div class="podium-idx">Índice: <strong>2º</strong></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">5 gols · 7 assist. · nota 6,62</div>
+        </div>
+        <div class="podium-card p3">
+          <div class="podium-rank">🥉</div>
+          <div class="podium-name">Artur Sousa</div>
+          <div class="podium-pos">GOL</div>
+          <div class="podium-idx">Índice: <strong>3º</strong></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">37 def. · nota 6,51 · 3 jogos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOTALS -->
+    <div class="totals-bar" style="margin-top:24px">
+      <div class="total-item"><div class="total-val">81</div><div class="total-lbl">Gols Marcados</div></div>
+      <div class="total-item"><div class="total-val">71</div><div class="total-lbl">Assistências</div></div>
+      <div class="total-item"><div class="total-val">104</div><div class="total-lbl">Defesas</div></div>
+      <div class="total-item"><div class="total-val">6,16</div><div class="total-lbl">Nota Média Geral</div></div>
+      <div class="total-item"><div class="total-val">17</div><div class="total-lbl">Jogadores Ativos</div></div>
+    </div>
+
+  </div><!-- /tab-premios -->
+
+  <!-- TAB: TABELA -->
+  <div id="tab-tabela" class="tab-panel">
+    <table class="stats-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Jogador</th>
+          <th>Pos</th>
+          <th>JG</th>
+          <th>GOLS</th>
+          <th>ASSIST</th>
+          <th>DEF</th>
+          <th>NOTA</th>
+          <th>MVP</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-body"><tr>
+    <td style="color:var(--muted)">1</td>
+    <td>
+      <div class="player-name">Leandro Sampaio</div>
+      <div class="player-nick">@leandro8921 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-GOL">GOL</span></td>
+    <td>4</td>
+    <td class="">0</td>
+    <td class="">0</td>
+    <td>55</td>
+    <td>6,91</td>
+    <td><span class="mvp-star">★★</span></td>
+  </tr><tr>
+    <td style="color:var(--muted)">2</td>
+    <td>
+      <div class="player-name">Carlos Sturari</div>
+      <div class="player-nick">@sturari08 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-ATA">ATA</span></td>
+    <td>4</td>
+    <td class="stat-highlight">15</td>
+    <td class="stat-highlight">11</td>
+    <td>—</td>
+    <td>6,84</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">3</td>
+    <td>
+      <div class="player-name">João F. Cantarella</div>
+      <div class="player-nick">@joca19 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-MEI">MEI</span></td>
+    <td>3</td>
+    <td class="stat-highlight">4</td>
+    <td class="stat-highlight">6</td>
+    <td>—</td>
+    <td>6,73</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">4</td>
+    <td>
+      <div class="player-name">Tales Gonzaga</div>
+      <div class="player-nick">@tales55 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-VOL">VOL</span></td>
+    <td>2</td>
+    <td class="stat-highlight">2</td>
+    <td class="stat-highlight">7</td>
+    <td>—</td>
+    <td>6,68</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">5</td>
+    <td>
+      <div class="player-name">Guilherme Pozzer</div>
+      <div class="player-nick">@drug4 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-VOL">VOL</span></td>
+    <td>4</td>
+    <td class="stat-highlight">5</td>
+    <td class="stat-highlight">7</td>
+    <td>—</td>
+    <td>6,62</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">6</td>
+    <td>
+      <div class="player-name">Marcelo Arantes</div>
+      <div class="player-nick">@arantess <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-ZAG">ZAG</span></td>
+    <td>2</td>
+    <td class="stat-highlight">2</td>
+    <td class="stat-highlight">4</td>
+    <td>—</td>
+    <td>6,27</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">7</td>
+    <td>
+      <div class="player-name">Pedro Rodrigues</div>
+      <div class="player-nick">@pedraopresida <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-ZAG">ZAG</span></td>
+    <td>4</td>
+    <td class="stat-highlight">2</td>
+    <td class="stat-highlight">3</td>
+    <td>—</td>
+    <td>6,16</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">8</td>
+    <td>
+      <div class="player-name">Alex de Paiva e Silva</div>
+      <div class="player-nick">@alex_yashin <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-GOL">GOL</span></td>
+    <td>1</td>
+    <td class="">0</td>
+    <td class="">0</td>
+    <td>12</td>
+    <td>6,10</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">9</td>
+    <td>
+      <div class="player-name">Fernando Bomfim</div>
+      <div class="player-nick">@bifebomfim <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-VOL">VOL</span></td>
+    <td>4</td>
+    <td class="stat-highlight">12</td>
+    <td class="stat-highlight">5</td>
+    <td>—</td>
+    <td>6,00</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">10</td>
+    <td>
+      <div class="player-name">Renan Schiavetto</div>
+      <div class="player-nick">@rele <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-ZAG">ZAG</span></td>
+    <td>3</td>
+    <td class="stat-highlight">2</td>
+    <td class="stat-highlight">1</td>
+    <td>—</td>
+    <td>5,55</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">11</td>
+    <td>
+      <div class="player-name">Iuri Costa Vale</div>
+      <div class="player-nick">@iuri06 <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-ATA">ATA</span></td>
+    <td>4</td>
+    <td class="stat-highlight">12</td>
+    <td class="stat-highlight">5</td>
+    <td>—</td>
+    <td>5,43</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">12</td>
+    <td>
+      <div class="player-name">Fernando Di Sicco</div>
+      <div class="player-nick">@fdisicco <span class="mensalista">✅</span></div>
+    </td>
+    <td><span class="pos-badge pos-MEI">MEI</span></td>
+    <td>4</td>
+    <td class="stat-highlight">9</td>
+    <td class="stat-highlight">9</td>
+    <td>—</td>
+    <td>4,82</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">19</td>
+    <td>
+      <div class="player-name">André Victor</div>
+      <div class="player-nick">@andrevictordj <span class="suplente">🔸</span></div>
+    </td>
+    <td><span class="pos-badge pos-MEI">MEI</span></td>
+    <td>1</td>
+    <td class="stat-highlight">3</td>
+    <td class="stat-highlight">4</td>
+    <td>—</td>
+    <td>7,82</td>
+    <td><span class="mvp-star">★</span></td>
+  </tr><tr>
+    <td style="color:var(--muted)">20</td>
+    <td>
+      <div class="player-name">Rodrigo Kcond</div>
+      <div class="player-nick">@rodrigokcond <span class="suplente">🔸</span></div>
+    </td>
+    <td><span class="pos-badge pos-ATA">ATA</span></td>
+    <td>2</td>
+    <td class="stat-highlight">6</td>
+    <td class="stat-highlight">3</td>
+    <td>—</td>
+    <td>6,63</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">21</td>
+    <td>
+      <div class="player-name">Artur Sousa</div>
+      <div class="player-nick">@artur8 <span class="suplente">🔸</span></div>
+    </td>
+    <td><span class="pos-badge pos-GOL">GOL</span></td>
+    <td>3</td>
+    <td class="stat-highlight">4</td>
+    <td class="stat-highlight">4</td>
+    <td>37</td>
+    <td>6,51</td>
+    <td><span class="mvp-star">★</span></td>
+  </tr><tr>
+    <td style="color:var(--muted)">22</td>
+    <td>
+      <div class="player-name">Eduardo Rodrigues</div>
+      <div class="player-nick">@dudurodriguesc <span class="suplente">🔸</span></div>
+    </td>
+    <td><span class="pos-badge pos-MEI">MEI</span></td>
+    <td>1</td>
+    <td class="stat-highlight">3</td>
+    <td class="stat-highlight">1</td>
+    <td>—</td>
+    <td>5,00</td>
+    <td>—</td>
+  </tr><tr>
+    <td style="color:var(--muted)">23</td>
+    <td>
+      <div class="player-name">Fred Balbino</div>
+      <div class="player-nick">@flbvida <span class="suplente">🔸</span></div>
+    </td>
+    <td><span class="pos-badge pos-ATA">ATA</span></td>
+    <td>1</td>
+    <td class="">0</td>
+    <td class="stat-highlight">1</td>
+    <td>—</td>
+    <td>4,64</td>
+    <td>—</td>
+  </tr></tbody>
+    </table>
+  </div>
+
+  <!-- TAB: ARTILHARIA -->
+  <div id="tab-artilharia" class="tab-panel">
+    <div class="scoring-grid">
+      <div class="scoring-card">
+        <div class="scoring-card-title">⚽ Artilharia — Gols</div>
+        <div id="top-gols"><div class="scoring-row">
+      <span class="scoring-rank">1</span>
+      <span class="scoring-name">Carlos Sturari<br><span style="font-size:10px;color:var(--muted)">@sturari08</span></span>
+      <span class="scoring-val">15</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">2</span>
+      <span class="scoring-name">Fernando Bomfim<br><span style="font-size:10px;color:var(--muted)">@bifebomfim</span></span>
+      <span class="scoring-val">12</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">3</span>
+      <span class="scoring-name">Iuri Costa Vale<br><span style="font-size:10px;color:var(--muted)">@iuri06</span></span>
+      <span class="scoring-val">12</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">4</span>
+      <span class="scoring-name">Fernando Di Sicco<br><span style="font-size:10px;color:var(--muted)">@fdisicco</span></span>
+      <span class="scoring-val">9</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">5</span>
+      <span class="scoring-name">Rodrigo Kcond<br><span style="font-size:10px;color:var(--muted)">@rodrigokcond</span></span>
+      <span class="scoring-val">6</span>
+    </div></div>
+      </div>
+      <div class="scoring-card">
+        <div class="scoring-card-title">🅰️ Garçom — Assistências</div>
+        <div id="top-assist"><div class="scoring-row">
+      <span class="scoring-rank">1</span>
+      <span class="scoring-name">Carlos Sturari<br><span style="font-size:10px;color:var(--muted)">@sturari08</span></span>
+      <span class="scoring-val">11</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">2</span>
+      <span class="scoring-name">Fernando Di Sicco<br><span style="font-size:10px;color:var(--muted)">@fdisicco</span></span>
+      <span class="scoring-val">9</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">3</span>
+      <span class="scoring-name">Tales Gonzaga<br><span style="font-size:10px;color:var(--muted)">@tales55</span></span>
+      <span class="scoring-val">7</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">4</span>
+      <span class="scoring-name">Guilherme Pozzer<br><span style="font-size:10px;color:var(--muted)">@drug4</span></span>
+      <span class="scoring-val">7</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">5</span>
+      <span class="scoring-name">João F. Cantarella<br><span style="font-size:10px;color:var(--muted)">@joca19</span></span>
+      <span class="scoring-val">6</span>
+    </div></div>
+      </div>
+    </div>
+    <div class="scoring-grid">
+      <div class="scoring-card">
+        <div class="scoring-card-title">🧤 Defesas (Goleiros)</div>
+        <div id="top-def"><div class="scoring-row">
+      <span class="scoring-rank">1</span>
+      <span class="scoring-name">Leandro Sampaio<br><span style="font-size:10px;color:var(--muted)">@leandro8921</span></span>
+      <span class="scoring-val">55</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">2</span>
+      <span class="scoring-name">Artur Sousa<br><span style="font-size:10px;color:var(--muted)">@artur8</span></span>
+      <span class="scoring-val">37</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">3</span>
+      <span class="scoring-name">Alex de Paiva e Silva<br><span style="font-size:10px;color:var(--muted)">@alex_yashin</span></span>
+      <span class="scoring-val">12</span>
+    </div></div>
+      </div>
+      <div class="scoring-card">
+        <div class="scoring-card-title">📊 Nota Média (≥ 3 jogos)</div>
+        <div id="top-nota"><div class="scoring-row">
+      <span class="scoring-rank">1</span>
+      <span class="scoring-name">Leandro Sampaio<br><span style="font-size:10px;color:var(--muted)">@leandro8921</span></span>
+      <span class="scoring-val">6,91</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">2</span>
+      <span class="scoring-name">Carlos Sturari<br><span style="font-size:10px;color:var(--muted)">@sturari08</span></span>
+      <span class="scoring-val">6,84</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">3</span>
+      <span class="scoring-name">João F. Cantarella<br><span style="font-size:10px;color:var(--muted)">@joca19</span></span>
+      <span class="scoring-val">6,73</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">4</span>
+      <span class="scoring-name">Guilherme Pozzer<br><span style="font-size:10px;color:var(--muted)">@drug4</span></span>
+      <span class="scoring-val">6,62</span>
+    </div><div class="scoring-row">
+      <span class="scoring-rank">5</span>
+      <span class="scoring-name">Artur Sousa<br><span style="font-size:10px;color:var(--muted)">@artur8</span></span>
+      <span class="scoring-val">6,51</span>
+    </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <p>Foi um mês de <strong>bom futebol e resenha ainda melhor.</strong><br>
+    Parabéns a todos os camaradas pelo mês de Maio! 🍺</p>
+    <p style="margin-top:10px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--border)">Bom Senso Futebol &amp; Cerveja</p>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+const players = [
+  { num:1,  nome:'Leandro Sampaio',       apelido:'@leandro8921',    pos:'GOL', vinculo:'✅', jogos:4,  gols:0,  assist:0,  defesas:55, nota:6.905,        mvp:2 },
+  { num:2,  nome:'Carlos Sturari',         apelido:'@sturari08',      pos:'ATA', vinculo:'✅', jogos:4,  gols:15, assist:11, defesas:0,  nota:6.84,         mvp:0 },
+  { num:3,  nome:'João F. Cantarella',     apelido:'@joca19',         pos:'MEI', vinculo:'✅', jogos:3,  gols:4,  assist:6,  defesas:0,  nota:6.727,        mvp:0 },
+  { num:4,  nome:'Tales Gonzaga',          apelido:'@tales55',        pos:'VOL', vinculo:'✅', jogos:2,  gols:2,  assist:7,  defesas:0,  nota:6.68,         mvp:0 },
+  { num:5,  nome:'Guilherme Pozzer',       apelido:'@drug4',          pos:'VOL', vinculo:'✅', jogos:4,  gols:5,  assist:7,  defesas:0,  nota:6.62,         mvp:0 },
+  { num:6,  nome:'Marcelo Arantes',        apelido:'@arantess',       pos:'ZAG', vinculo:'✅', jogos:2,  gols:2,  assist:4,  defesas:0,  nota:6.27,         mvp:0 },
+  { num:7,  nome:'Pedro Rodrigues',        apelido:'@pedraopresida',  pos:'ZAG', vinculo:'✅', jogos:4,  gols:2,  assist:3,  defesas:0,  nota:6.16,         mvp:0 },
+  { num:8,  nome:'Alex de Paiva e Silva',  apelido:'@alex_yashin',    pos:'GOL', vinculo:'✅', jogos:1,  gols:0,  assist:0,  defesas:12, nota:6.1,          mvp:0 },
+  { num:9,  nome:'Fernando Bomfim',        apelido:'@bifebomfim',     pos:'VOL', vinculo:'✅', jogos:4,  gols:12, assist:5,  defesas:0,  nota:6.0,          mvp:0 },
+  { num:10, nome:'Renan Schiavetto',       apelido:'@rele',           pos:'ZAG', vinculo:'✅', jogos:3,  gols:2,  assist:1,  defesas:0,  nota:5.547,        mvp:0 },
+  { num:11, nome:'Iuri Costa Vale',        apelido:'@iuri06',         pos:'ATA', vinculo:'✅', jogos:4,  gols:12, assist:5,  defesas:0,  nota:5.435,        mvp:0 },
+  { num:12, nome:'Fernando Di Sicco',      apelido:'@fdisicco',       pos:'MEI', vinculo:'✅', jogos:4,  gols:9,  assist:9,  defesas:0,  nota:4.82,         mvp:0 },
+  { num:19, nome:'André Victor',           apelido:'@andrevictordj',  pos:'MEI', vinculo:'🔸', jogos:1,  gols:3,  assist:4,  defesas:0,  nota:7.82,         mvp:1 },
+  { num:20, nome:'Rodrigo Kcond',          apelido:'@rodrigokcond',   pos:'ATA', vinculo:'🔸', jogos:2,  gols:6,  assist:3,  defesas:0,  nota:6.63,         mvp:0 },
+  { num:21, nome:'Artur Sousa',            apelido:'@artur8',         pos:'GOL', vinculo:'🔸', jogos:3,  gols:4,  assist:4,  defesas:37, nota:6.513,        mvp:1 },
+  { num:22, nome:'Eduardo Rodrigues',      apelido:'@dudurodriguesc', pos:'MEI', vinculo:'🔸', jogos:1,  gols:3,  assist:1,  defesas:0,  nota:5.0,          mvp:0 },
+  { num:23, nome:'Fred Balbino',           apelido:'@flbvida',        pos:'ATA', vinculo:'🔸', jogos:1,  gols:0,  assist:1,  defesas:0,  nota:4.64,         mvp:0 },
+];
+
+function fmt(n, decimals=2) {
+  if (typeof n !== 'number') return n;
+  return n.toFixed(decimals).replace('.',',');
+}
+
+// Build tabela
+const tbody = document.getElementById('tabela-body');
+players.forEach(p => {
+  const tr = document.createElement('tr');
+  const notaStr = p.nota ? fmt(p.nota) : '—';
+  const mvpStr  = p.mvp > 0 ? `<span class="mvp-star">${'★'.repeat(p.mvp)}</span>` : '—';
+  const posClass = `pos-${p.pos}`;
+  const vincClass = p.vinculo === '✅' ? 'mensalista' : 'suplente';
+  tr.innerHTML = `
+    <td style="color:var(--muted)">${p.num}</td>
+    <td>
+      <div class="player-name">${p.nome}</div>
+      <div class="player-nick">${p.apelido} <span class="${vincClass}">${p.vinculo}</span></div>
+    </td>
+    <td><span class="pos-badge ${posClass}">${p.pos}</span></td>
+    <td>${p.jogos}</td>
+    <td class="${p.gols > 0 ? 'stat-highlight' : ''}">${p.gols}</td>
+    <td class="${p.assist > 0 ? 'stat-highlight' : ''}">${p.assist}</td>
+    <td>${p.defesas > 0 ? p.defesas : '—'}</td>
+    <td>${notaStr}</td>
+    <td>${mvpStr}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// Build scoring lists
+function buildRanking(containerId, field, label, filterFn, decimals=0) {
+  const sorted = [...players].filter(filterFn || (p => p.jogos > 0))
+    .sort((a,b) => b[field] - a[field])
+    .slice(0,5);
+  const el = document.getElementById(containerId);
+  sorted.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'scoring-row';
+    const val = decimals > 0 ? fmt(p[field], decimals) : p[field];
+    div.innerHTML = `
+      <span class="scoring-rank">${i+1}</span>
+      <span class="scoring-name">${p.nome}<br><span style="font-size:10px;color:var(--muted)">${p.apelido}</span></span>
+      <span class="scoring-val">${val}</span>
+    `;
+    el.appendChild(div);
+  });
+}
+
+buildRanking('top-gols',   'gols',    'Gols',   p => p.gols > 0);
+buildRanking('top-assist', 'assist',  'Assist.', p => p.assist > 0);
+buildRanking('top-def',    'defesas', 'Def.',    p => p.defesas > 0);
+buildRanking('top-nota',   'nota',    'Nota',    p => p.jogos >= 3, 2);
+
+// Tabs
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+
+</body></html>
